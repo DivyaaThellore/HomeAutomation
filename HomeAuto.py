@@ -13,6 +13,7 @@ import requests
 import math
 import random
 
+ledPin = 11    # RPI Board pin11
 DHTPin = 11     #define the pin of DHT11
 
 TOKEN = "A1E-Zu5858mz1VC3y8h8aU26WM7A0zWhnN"  # Put your TOKEN here
@@ -105,8 +106,10 @@ def loop():
             print("min control temperature {0}".format(minControlTemp))
             if (minControlTemp < dht.temperature):
                 print("Start AC")
+				switchOn()
             else:
                 print("No AC needed")
+				switchOff()
             
 
         elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
@@ -118,13 +121,40 @@ def loop():
         
         
         time.sleep(1)       
+
+def setup():
+	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
+	GPIO.setup(ledPin, GPIO.OUT)   # Set ledPin's mode is output
+	GPIO.output(ledPin, GPIO.LOW) # Set ledPin low to off led
+	print ('using pin%d'%ledPin)
+
+def switchOn():
+	GPIO.output(ledPin, GPIO.HIGH)  # led on
+	print ('...led on')
+	
+def switchOff():
+	GPIO.output(ledPin, GPIO.LOW) # led off
+	print ('led off...')
+			
+def destroy():
+	GPIO.output(ledPin, GPIO.LOW)     # led off
+	GPIO.cleanup()                     # Release resource
+		
+
+		
+		
+		
         
 if __name__ == '__main__':
     print ('Program is starting ... ')
+	setup()
+	
     try:
         loop()
     except KeyboardInterrupt:
         GPIO.cleanup()
-        exit()  
+        exit()
+		
+	destroy()		
 
 
