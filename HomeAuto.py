@@ -13,7 +13,7 @@ import requests
 import math
 import random
 
-ledPin = 11    # RPI Board pin11
+ledPin = 18    # RPI Board pin11
 DHTPin = 11     #define the pin of DHT11
 
 TOKEN = "A1E-Zu5858mz1VC3y8h8aU26WM7A0zWhnN"  # Put your TOKEN here
@@ -148,9 +148,10 @@ if __name__ == '__main__':
     try:
         loop()
     except KeyboardInterrupt:
-        GPIO.cleanup()
+        
+		GPIO.cleanup()
         exit()
 
-        destroy()		
+        	
 
 
