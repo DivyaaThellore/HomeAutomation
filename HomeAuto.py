@@ -95,22 +95,22 @@ def loop():
         if (chk is dht.DHTLIB_OK):      #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
             print("DHT11,OK!")
             print("Humidity : %.2f, \t Temperature : %.2f \n"%(dht.humidity,dht.temperature))
-            
+
             payload = build_payload(VARIABLE_LABEL_1, VARIABLE_LABEL_2, VARIABLE_LABEL_3,dht.temperature,dht.humidity)
 
             print("[INFO] Attemping to send data")
             post_request(payload)
             print("[INFO] finished")
-            
+
             minControlTemp = get_var(DEVICE, MINTEMP)
             print("min control temperature {0}".format(minControlTemp))
             if (minControlTemp < dht.temperature):
                 print("Start AC")
-				switchOn()
+                switchOn()
             else:
                 print("No AC needed")
-				switchOff()
-            
+                switchOff()
+
 
         elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
             print("DHTLIB_ERROR_CHECKSUM!!")
@@ -118,43 +118,39 @@ def loop():
             print("DHTLIB_ERROR_TIMEOUT!")
         else:               #other errors
             print("Other error!")
-        
-        
+
+
         time.sleep(1)       
 
 def setup():
-	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
-	GPIO.setup(ledPin, GPIO.OUT)   # Set ledPin's mode is output
-	GPIO.output(ledPin, GPIO.LOW) # Set ledPin low to off led
-	print ('using pin%d'%ledPin)
+    GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
+    GPIO.setup(ledPin, GPIO.OUT)   # Set ledPin's mode is output
+    GPIO.output(ledPin, GPIO.LOW) # Set ledPin low to off led
+    print ('using pin%d'%ledPin)
 
 def switchOn():
-	GPIO.output(ledPin, GPIO.HIGH)  # led on
-	print ('...led on')
-	
-def switchOff():
-	GPIO.output(ledPin, GPIO.LOW) # led off
-	print ('led off...')
-			
-def destroy():
-	GPIO.output(ledPin, GPIO.LOW)     # led off
-	GPIO.cleanup()                     # Release resource
-		
+    GPIO.output(ledPin, GPIO.HIGH)  # led on
+    print ('...led on')
 
-		
-		
-		
-        
+def switchOff():
+    GPIO.output(ledPin, GPIO.LOW) # led off
+    print ('led off...')
+
+def destroy():
+    GPIO.output(ledPin, GPIO.LOW)     # led off
+    GPIO.cleanup()                     # Release resource
+
+
 if __name__ == '__main__':
     print ('Program is starting ... ')
-	setup()
-	
+    setup()
+
     try:
         loop()
     except KeyboardInterrupt:
         GPIO.cleanup()
         exit()
-		
-	destroy()		
+
+        destroy()		
 
 
