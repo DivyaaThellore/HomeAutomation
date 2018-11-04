@@ -122,11 +122,7 @@ def loop():
 
         time.sleep(1)       
 
-def setup():
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
-	#GPIO.setup(18,GPIO.OUT)
-	
+
 def switchOn():
     print("LED on")
     GPIO.output(18,GPIO.HIGH)
@@ -139,7 +135,6 @@ def switchOff():
 
 if __name__ == '__main__':
     print ('Program is starting ... ')
-    setup()
 
     try:
         loop()

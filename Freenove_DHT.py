@@ -24,6 +24,7 @@ class DHT(object):
 		self.pin = pin
 		self.bits = [0,0,0,0,0]
 		GPIO.setmode(GPIO.BOARD)
+		
 	#Read DHT sensor, store the original data in bits[]	
 	def readSensor(self,pin,wakeupDelay):
 		mask = 0x80
@@ -35,6 +36,7 @@ class DHT(object):
 		GPIO.output(pin,GPIO.HIGH)
 		#time.sleep(40*0.000001)
 		GPIO.setup(pin,GPIO.IN)
+		GPIO.setup(18,GPIO.OUT)
 		
 		loopCnt = self.DHTLIB_TIMEOUT
 		t = time.time()
