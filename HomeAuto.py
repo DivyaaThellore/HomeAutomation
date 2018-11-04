@@ -123,23 +123,18 @@ def loop():
         time.sleep(1)       
 
 def setup():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    GPIO.setup(18,GPIO.OUT)
-    print ('using pin%d'%ledPin)
-
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	GPIO.setup(18,GPIO.OUT)
+	
 def switchOn():
     print("LED on")
     GPIO.output(18,GPIO.HIGH)
-
+	
 def switchOff():
     print ("LED off")
-    GPIO.output(18,GPIO.LOW)
-    GPIO.output(ledPin, GPIO.LOW) # led off
+    GPIO.output(18,GPIO.LOW)    
 
-def destroy():
-    GPIO.output(ledPin, GPIO.LOW)     # led off
-    GPIO.cleanup()                     # Release resource
 
 
 if __name__ == '__main__':
