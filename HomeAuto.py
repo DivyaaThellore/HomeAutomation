@@ -125,7 +125,7 @@ def loop():
 def setup():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-	GPIO.setup(18,GPIO.OUT)
+	#GPIO.setup(18,GPIO.OUT)
 	
 def switchOn():
     print("LED on")
