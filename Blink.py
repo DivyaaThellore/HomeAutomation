@@ -8,21 +8,21 @@
 import RPi.GPIO as GPIO
 import time
 
-ledPin = 11    # RPI Board pin11
+
 
 def setup():
-	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
-	GPIO.setup(ledPin, GPIO.OUT)   # Set ledPin's mode is output
-	GPIO.output(ledPin, GPIO.LOW) # Set ledPin low to off led
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	GPIO.setup(18,GPIO.OUT)
 	print ('using pin%d'%ledPin)
 
 def loop():
 	while True:
-		GPIO.output(ledPin, GPIO.HIGH)  # led on
-		print ('...led on')
-		time.sleep(1)	
-		GPIO.output(ledPin, GPIO.LOW) # led off
-		print ('led off...')
+		print("LED on")
+		GPIO.output(18,GPIO.HIGH)
+		time.sleep(1)
+		print ("LED off")
+		GPIO.output(18,GPIO.LOW)
 		time.sleep(1)
 
 def destroy():
