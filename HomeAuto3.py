@@ -141,13 +141,13 @@ if __name__ == '__main__':
     print ('Program is starting ... ')
 	
     try:
-		setup()
+        setup()
         loop()
     except KeyboardInterrupt:
-        
-	GPIO.cleanup()
+        GPIO.cleanup()
         exit()
 
         	
+
 
 
