@@ -128,12 +128,12 @@ def setup():
 	
 def switchOn():
     print("LED on") 
-	GPIO.setup(18,GPIO.OUT)
+    GPIO.setup(18,GPIO.OUT)
     GPIO.output(18,GPIO.HIGH)
 	
 def switchOff():
     print ("LED off")
-	GPIO.setup(18,GPIO.OUT)
+    GPIO.setup(18,GPIO.OUT)
     GPIO.output(18,GPIO.LOW)    
 
 
