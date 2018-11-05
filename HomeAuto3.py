@@ -13,7 +13,7 @@ import requests
 import math
 import random
 
-ledPin = 18    # RPI Board pin11
+ledPin = 18    # RPI Board pin18
 DHTPin = 11     #define the pin of DHT11
 
 TOKEN = "A1E-Zu5858mz1VC3y8h8aU26WM7A0zWhnN"  # Put your TOKEN here
@@ -139,6 +139,7 @@ def switchOff():
 
 if __name__ == '__main__':
     print ('Program is starting ... ')
+	
 	setup()
 
     try:
