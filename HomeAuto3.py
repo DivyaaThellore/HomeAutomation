@@ -12,9 +12,11 @@ import time
 import requests
 import math
 import random
+from gpiozero import LED
 
 #ledPin = 18    # RPI Board pin18
 DHTPin = 11     #define the pin of DHT11
+led = LED(18)
 
 TOKEN = "A1E-Zu5858mz1VC3y8h8aU26WM7A0zWhnN"  # Put your TOKEN here
 DEVICE_LABEL = "homeautomation"  # Put your device label here 
@@ -106,10 +108,10 @@ def loop():
             print("min control temperature {0}".format(minControlTemp))
             if (minControlTemp < dht.temperature):
                 print("Start AC")
-                switchOn()
+                led.on
             else:
                 print("No AC needed")
-                switchOff()
+                led.off
 
 
         elif(chk is dht.DHTLIB_ERROR_CHECKSUM): #data check has errors
@@ -122,18 +124,7 @@ def loop():
 
         time.sleep(1)       
 
-def setup():
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
-	GPIO.setup(12,GPIO.OUT)
-	
-def switchOn():
-    print("LED on")
-    GPIO.output(12,GPIO.HIGH)
-	
-def switchOff():
-    print ("LED off")
-    GPIO.output(12,GPIO.LOW)    
+   
 
 
 
@@ -141,7 +132,6 @@ if __name__ == '__main__':
     print ('Program is starting ... ')
 	
     try:
-        setup()
         loop()
     except KeyboardInterrupt:
         GPIO.cleanup()
